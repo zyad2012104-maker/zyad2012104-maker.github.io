@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppNova - لوحة الإدارة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="topAdContainer" style="text-align: center; margin: 10px auto; max-width: 1200px;"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 AppNova</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="ابحث عن تطبيق...">
+                <button onclick="searchApps()">🔍</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 الرئيسية</a></li>
+                <li><a href="apps.html">📱 التطبيقات</a></li>
+                <li id="uploadNav"><a href="upload.html">⬆️ رفع تطبيق</a></li>
+                <li id="loginNav"><a href="login.html">🔐 تسجيل الدخول</a></li>
+                <li id="adminNav" style="display:none;"><a href="admin.html">👑 الإدارة</a></li>
+                <li id="moderatorNav" style="display:none;"><a href="admin.html">🛡️ الإشراف</a></li>
+                <li id="userInfo" style="display:none;"></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <aside class="ad-sidebar ad-left">
+            <div id="leftAdContainer" class="ad-container"></div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="hero">
+                <h1 id="adminPageTitle">⚙️ لوحة التحكم - الإدارة</h1>
+                <p id="adminPageDesc">إدارة المستخدمين والمشرفين والتطبيقات والتعليقات والتصنيفات والإعلانات</p>
+            </div>
+            
+            <div class="stats-cards" id="statsCards"></div>
+            
+            <div class="admin-tabs" id="adminTabs">
+                <button class="admin-tab active" data-panel="users" onclick="showAdminPanel('users')">👥 المستخدمين</button>
+                <button class="admin-tab" data-panel="moderators" id="moderatorsTab" onclick="showAdminPanel('moderators')">👑 المشرفين</button>
+                <button class="admin-tab" data-panel="apps" onclick="showAdminPanel('apps')">📱 التطبيقات</button>
+                <button class="admin-tab" data-panel="comments" onclick="showAdminPanel('comments')">💬 التعليقات</button>
+                <button class="admin-tab" data-panel="categories" onclick="showAdminPanel('categories')">🏷️ التصنيفات</button>
+                <button class="admin-tab" data-panel="favicon" onclick="showAdminPanel('favicon')">🖼️ أيقونة الموقع</button>
+                <button class="admin-tab" data-panel="ads" onclick="showAdminPanel('ads')">📢 الإعلانات</button>
+            </div>
+            
+            <div id="usersPanel" class="admin-panel active">
+                <div class="search-admin">
+                    <input type="text" id="searchUsers" placeholder="ابحث عن مستخدم..." onkeyup="searchUsers()">
+                    <button onclick="searchUsers()">🔍 بحث</button>
+                </div>
+                <div class="admin-table" id="usersTable"></div>
+            </div>
+            
+            <div id="moderatorsPanel" class="admin-panel">
+                <div class="search-admin">
+                    <input type="text" id="searchModerators" placeholder="ابحث عن مشرف..." onkeyup="searchModerators()">
+                    <button onclick="searchModerators()">🔍 بحث</button>
+                </div>
+                <div class="admin-table" id="moderatorsTable"></div>
+                
+                <div id="addModeratorSection" class="add-moderator-form">
+                    <h3>➕ إضافة مشرف جديد</h3>
+                    <form id="addModeratorForm">
+                        <div class="form-row">
+                            <input type="text" id="modUsername" placeholder="اسم المستخدم" required>
+                            <input type="email" id="modEmail" placeholder="البريد الإلكتروني" required>
+                            <input type="password" id="modPassword" placeholder="كلمة المرور" required>
+                        </div>
+                        <div class="permissions-group">
+                            <label><input type="checkbox" id="permDeleteUser"> 🗑️ حذف المستخدمين</label>
+                            <label><input type="checkbox" id="permDeleteApp"> 📱 حذف التطبيقات</label>
+                            <label><input type="checkbox" id="permEditApp"> ✏️ تعديل التطبيقات</label>
+                            <label><input type="checkbox" id="permDeleteComment"> 💬 حذف التعليقات</label>
+                            <label><input type="checkbox" id="permEditComment"> ✏️ تعديل التعليقات</label>
+                            <label><input type="checkbox" id="permViewStats"> 📊 عرض الإحصائيات</label>
+                            <label><input type="checkbox" id="permManageCategories"> 🏷️ إدارة التصنيفات</label>
+                        </div>
+                        <button type="submit" class="submit-btn">➕ إضافة مشرف</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="appsPanel" class="admin-panel">
+                <div class="search-admin">
+                    <input type="text" id="searchApps" placeholder="ابحث عن تطبيق..." onkeyup="searchAdminApps()">
+                    <button onclick="searchAdminApps()">🔍 بحث</button>
+                </div>
+                <div class="admin-table" id="appsTable"></div>
+            </div>
+            
+            <div id="commentsPanel" class="admin-panel">
+                <div class="search-admin">
+                    <input type="text" id="searchComments" placeholder="ابحث عن تعليق..." onkeyup="searchComments()">
+                    <button onclick="searchComments()">🔍 بحث</button>
+                </div>
+                <div class="admin-table" id="commentsTable"></div>
+            </div>
+            
+            <div id="categoriesPanel" class="admin-panel">
+                <div class="categories-admin">
+                    <h3>🏷️ قائمة التصنيفات</h3>
+                    <div id="categoriesList"></div>
+                    <div class="add-category-form">
+                        <input type="text" id="newCategoryName" placeholder="اسم التصنيف الجديد">
+                        <input type="text" id="newCategoryIcon" placeholder="الأيقونة (مثال: 🎮)" style="width:80px;">
+                        <input type="text" id="newCategoryKey" placeholder="المفتاح (مثال: games)">
+                        <button onclick="addCategory()">➕ إضافة تصنيف</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="faviconPanel" class="admin-panel">
+                <div class="categories-admin">
+                    <h3>🖼️ إدارة أيقونة الموقع (Favicon)</h3>
+                    <p>يمكنك رفع صورة لتكون أيقونة الموقع التي تظهر في علامة التبويب</p>
+                    
+                    <div class="favicon-upload">
+                        <div class="favicon-preview" id="faviconPreview">
+                            <img id="faviconPreviewImg" src="" onerror="this.style.display='none'" style="display:none;">
+                            <span id="noFaviconText">لا توجد أيقونة</span>
+                        </div>
+                        <input type="file" id="faviconFile" accept="image/png,image/jpeg,image/jpg,image/ico,image/x-icon">
+                        <button onclick="uploadFavicon()">📤 رفع أيقونة</button>
+                        <button onclick="removeFavicon()" class="remove-favicon">🗑️ إزالة الأيقونة</button>
+                    </div>
+                    
+                    <div class="info-box">
+                        <small>💡 ملاحظة: يفضل استخدام صورة مربعة بحجم 32x32 أو 64x64 بكسل بصيغة PNG أو ICO</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="adsPanel" class="admin-panel">
+                <div class="categories-admin">
+                    <h3>📢 إدارة إعلانات Google AdSense</h3>
+                    <p>يمكنك إضافة أكواد إعلانات Google AdSense في الأماكن المحددة</p>
+                    
+                    <div class="info-box" style="background: #e6f7ff; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                        <h4>💡 تعليمات إضافة إعلان AdSense:</h4>
+                        <ol style="margin-right: 20px; margin-top: 10px;">
+                            <li>انسخ كود الإعلان من حساب AdSense الخاص بك</li>
+                            <li>الصق الكود في الحقل المناسب أدناه</li>
+                            <li>اضغط على حفظ - سيتم تطبيق الإعلان فوراً</li>
+                            <li>لإزالة الإعلان، فقط احذف الكود واضغط حفظ</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- إعلان أعلى الصفحة -->
+                    <div class="ad-item" style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">📌 إعلان أعلى الصفحة (Top Banner)</h4>
+                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">يظهر في أعلى جميع الصفحات تحت القائمة مباشرة</p>
+                        <textarea id="topBannerCode" class="ad-code" rows="6" placeholder="أضف كود إعلان Google AdSense هنا&#10;مثال:&#10;<ins class='adsbygoogle' style='display:block' data-ad-client='ca-pub-xxxx' data-ad-slot='xxxx' data-ad-format='auto'></ins>&#10;<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: monospace; direction: ltr;"></textarea>
+                        <div class="ad-actions" style="margin-top: 15px;">
+                            <button onclick="saveAdCode('topBanner')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #10b981;">💾 حفظ</button>
+                            <button onclick="testAdCode('topBanner')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #3b82f6;">👁️ معاينة</button>
+                            <button onclick="clearAdCode('topBanner')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #ef4444;">🗑️ حذف</button>
+                        </div>
+                    </div>
+                    
+                    <!-- إعلان أسفل الصفحة -->
+                    <div class="ad-item" style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">📌 إعلان أسفل الصفحة (Bottom Banner)</h4>
+                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">يظهر في أسفل جميع الصفحات قبل الفوتر</p>
+                        <textarea id="bottomBannerCode" class="ad-code" rows="6" placeholder="أضف كود إعلان Google AdSense هنا" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: monospace; direction: ltr;"></textarea>
+                        <div class="ad-actions" style="margin-top: 15px;">
+                            <button onclick="saveAdCode('bottomBanner')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #10b981;">💾 حفظ</button>
+                            <button onclick="testAdCode('bottomBanner')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #3b82f6;">👁️ معاينة</button>
+                            <button onclick="clearAdCode('bottomBanner')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #ef4444;">🗑️ حذف</button>
+                        </div>
+                    </div>
+                    
+                    <!-- إعلان جانبي أيسر -->
+                    <div class="ad-item" style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">📌 إعلان جانبي أيسر (Left Sidebar)</h4>
+                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">يظهر في العمود الأيسر من الصفحة (عرض 180px)</p>
+                        <textarea id="leftSidebarCode" class="ad-code" rows="6" placeholder="أضف كود إعلان Google AdSense هنا" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: monospace; direction: ltr;"></textarea>
+                        <div class="ad-actions" style="margin-top: 15px;">
+                            <button onclick="saveAdCode('leftSidebar')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #10b981;">💾 حفظ</button>
+                            <button onclick="testAdCode('leftSidebar')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #3b82f6;">👁️ معاينة</button>
+                            <button onclick="clearAdCode('leftSidebar')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #ef4444;">🗑️ حذف</button>
+                        </div>
+                    </div>
+                    
+                    <!-- إعلان جانبي أيمن -->
+                    <div class="ad-item" style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">📌 إعلان جانبي أيمن (Right Sidebar)</h4>
+                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">يظهر في العمود الأيمن من الصفحة (عرض 180px)</p>
+                        <textarea id="rightSidebarCode" class="ad-code" rows="6" placeholder="أضف كود إعلان Google AdSense هنا" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: monospace; direction: ltr;"></textarea>
+                        <div class="ad-actions" style="margin-top: 15px;">
+                            <button onclick="saveAdCode('rightSidebar')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #10b981;">💾 حفظ</button>
+                            <button onclick="testAdCode('rightSidebar')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #3b82f6;">👁️ معاينة</button>
+                            <button onclick="clearAdCode('rightSidebar')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #ef4444;">🗑️ حذف</button>
+                        </div>
+                    </div>
+                    
+                    <!-- إعلان عند النقر (Click Ad) -->
+                    <div class="ad-item" style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">📌 إعلان عند النقر (Click Ad)</h4>
+                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">يظهر عند الضغط على زر تحميل التطبيق (نافذة منبثقة)</p>
+                        <textarea id="clickAdCode" class="ad-code" rows="8" placeholder="أضف كود إعلان Google AdSense للنافذة المنبثقة&#10;مثال:&#10;<div style='text-align:center; padding:20px;'>&#10;  <ins class='adsbygoogle' style='display:block' data-ad-client='ca-pub-xxxx' data-ad-slot='xxxx'></ins>&#10;  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>&#10;</div>" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: monospace; direction: ltr;"></textarea>
+                        <div class="ad-actions" style="margin-top: 15px;">
+                            <button onclick="saveAdCode('clickAd')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #10b981;">💾 حفظ</button>
+                            <button onclick="testAdCode('clickAd')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #3b82f6;">👁️ معاينة</button>
+                            <button onclick="clearAdCode('clickAd')" class="submit-btn" style="width: auto; padding: 10px 25px; background: #ef4444;">🗑️ حذف</button>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box" style="background: #fef3c7; padding: 15px; border-radius: 12px; margin-top: 20px;">
+                        <h4>⚠️ ملاحظات مهمة:</h4>
+                        <ul style="margin-right: 20px; margin-top: 10px;">
+                            <li>لعمل إعلانات AdSense، يجب أن يكون موقعك مفعل في Google AdSense</li>
+                            <li>قد يستغرق ظهور الإعلانات بضع دقائق بعد الحفظ</li>
+                            <li>يمكنك معاينة الإعلان قبل الحفظ للتأكد من عمله</li>
+                            <li>لإزالة الإعلان، احذف الكود بالكامل واضغط حفظ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ad-sidebar ad-right">
+            <div id="rightAdContainer" class="ad-container"></div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AppNova</h3>
+                <p>منصة عربية لتطبيقات الموبيل</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط</h3>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="apps.html">التطبيقات</a></li>
+                    <li><a href="upload.html">رفع تطبيق</a></li>
+                    <li><a href="privacy.html">سياسة الخصوصية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>النشرة البريدية</h3>
+                <div class="newsletter">
+                    <input type="email" id="newsletterEmail" placeholder="بريدك الإلكتروني">
+                    <button onclick="subscribeNewsletter()">اشتراك</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2024 AppNova. جميع الحقوق محفوظة</div>
+    </footer>
+
+    <div id="bottomAdContainer" style="text-align: center; margin: 10px auto; max-width: 1200px;"></div>
+
+    <div id="permissionsModal" class="modal">
+        <div class="modal-content permissions-modal-content">
+            <span class="close" onclick="closePermissionsModal()">&times;</span>
+            <h3>🔧 تعديل صلاحيات المشرف</h3>
+            <div id="permissionsModalContent"></div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="savePermissionsChanges()" class="submit-btn" style="flex:1;">💾 حفظ التغييرات</button>
+                <button onclick="closePermissionsModal()" class="submit-btn" style="flex:1; background:#94a3b8;">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="adModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdModal()">&times;</span>
+            <div id="modalAdContent"></div>
+            <button onclick="closeAdModal()" class="submit-btn">إغلاق</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        function searchApps() {
+            let term = document.getElementById('searchInput')?.value.toLowerCase().trim();
+            if(term) window.location.href = `apps.html?search=${encodeURIComponent(term)}`;
+        }
+    </script>
+</body>
+</html>

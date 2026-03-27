@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppNova - تفاصيل التطبيق</title>
+    <meta name="description" content="تفاصيل التطبيق">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* أنماط إضافية لصفحة التفاصيل */
+        .app-details-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            color: white;
+        }
+
+        .app-header-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .app-icon-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            object-fit: cover;
+        }
+
+        .app-info h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .app-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .app-meta span {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        .app-body {
+            padding: 30px;
+        }
+
+        .app-actions {
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .app-gallery {
+            margin: 30px 0;
+        }
+
+        .app-gallery h3 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        .app-description {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .rating-section {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .rating-stats {
+            margin: 20px 0;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .rating-bar-label {
+            width: 60px;
+            color: #fbbf24;
+        }
+
+        .rating-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background: #fbbf24;
+            border-radius: 4px;
+        }
+
+        .rating-bar-count {
+            width: 40px;
+            color: #64748b;
+        }
+
+        .comments-section {
+            margin-top: 30px;
+        }
+
+        .comment-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #64748b;
+        }
+
+        .comment-rating {
+            color: #fbbf24;
+        }
+
+        .add-comment {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .add-comment input,
+        .add-comment textarea,
+        .add-comment select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        .add-comment button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .similar-apps {
+            margin-top: 40px;
+        }
+
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .similar-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .similar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .similar-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 25px;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .app-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .similar-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- إعلان أعلى الصفحة -->
+    <div id="topAdContainer" style="text-align: center; margin: 10px auto; max-width: 1200px;"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 AppNova</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="ابحث عن تطبيق...">
+                <button onclick="searchApps()">🔍</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 الرئيسية</a></li>
+                <li><a href="apps.html">📱 التطبيقات</a></li>
+                <li id="uploadNav"><a href="upload.html">⬆️ رفع تطبيق</a></li>
+                <li id="loginNav"><a href="login.html">🔐 تسجيل الدخول</a></li>
+                <li id="adminNav" style="display:none;"><a href="admin.html">👑 الإدارة</a></li>
+                <li id="moderatorNav" style="display:none;"><a href="admin.html">🛡️ الإشراف</a></li>
+                <li id="userInfo" style="display:none;"></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <aside class="ad-sidebar ad-left">
+            <div id="leftAdContainer" class="ad-container"></div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div id="appDetails" class="app-details-container">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <h3>🔄 جاري تحميل بيانات التطبيق...</h3>
+                    <p style="color: #64748b; margin-top: 10px;">يرجى الانتظار قليلاً</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ad-sidebar ad-right">
+            <div id="rightAdContainer" class="ad-container"></div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AppNova</h3>
+                <p>منصة عربية لتطبيقات الموبيل</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط</h3>
+                <ul>
+                    <li><a href="index.html">🏠 الرئيسية</a></li>
+                    <li><a href="apps.html">📱 التطبيقات</a></li>
+                    <li><a href="upload.html">⬆️ رفع تطبيق</a></li>
+                    <li><a href="privacy.html">🔒 سياسة الخصوصية</a></li>
+                    <li><a href="about.html">👥 من نحن</a></li>
+                    <li><a href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>📧 النشرة البريدية</h3>
+                <div class="newsletter">
+                    <input type="email" id="newsletterEmail" placeholder="بريدك الإلكتروني">
+                    <button onclick="subscribeNewsletter()">اشتراك</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2024 AppNova. جميع الحقوق محفوظة</div>
+    </footer>
+
+    <div id="bottomAdContainer" style="text-align: center; margin: 10px auto; max-width: 1200px;"></div>
+
+    <div id="adModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdModal()">&times;</span>
+            <div id="modalAdContent"></div>
+            <button onclick="closeAdModal()" class="submit-btn">إغلاق</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <script src="app-details.js"></script>
+    <script>
+        function searchApps() {
+            let term = document.getElementById('searchInput')?.value.toLowerCase().trim();
+            if(term) window.location.href = `apps.html?search=${encodeURIComponent(term)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppNova | أكبر متجر تطبيقات عربية - تحميل تطبيقات مجانية</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AppNova: أكبر منصة عربية لتحميل وتحميل التطبيقات المجانية. اكتشف آلاف التطبيقات والألعاب والتطبيقات التعليمية والاجتماعية. حمّل التطبيقات الآن مجاناً!">
+    <meta name="keywords" content="تحميل تطبيقات, تطبيقات عربية, تحميل برامج, تطبيقات مجانية, متجر تطبيقات, ألعاب مجانية, تطبيقات أندرويد, تطبيقات آيفون, تطبيقات موبايل, AppNova, تحميل العاب, تطبيقات تعليمية, تطبيقات تواصل اجتماعي">
+    <meta name="author" content="AppNova">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="Arabic">
+    <meta name="revisit-after" content="1 days">
+    
+    <!-- Open Graph Meta Tags (فيسبوك) -->
+    <meta property="og:title" content="AppNova | أكبر متجر تطبيقات عربية">
+    <meta property="og:description" content="اكتشف آلاف التطبيقات والألعاب المجانية. حمّل التطبيقات الآن من AppNova">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://appnova.rf.gd">
+    <meta property="og:image" content="https://appnova.rf.gd/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AppNova | أكبر متجر تطبيقات عربية">
+    <meta name="twitter:description" content="اكتشف آلاف التطبيقات والألعاب المجانية">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://appnova.rf.gd">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AppNova",
+        "url": "https://appnova.rf.gd",
+        "description": "أكبر منصة عربية لتحميل وتحميل التطبيقات المجانية",
+        "inLanguage": "ar",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://appnova.rf.gd/apps.html?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+    
+    <!-- Google Analytics (تتبع الزوار) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <!-- محتوى الصفحة كما هو -->
+    <div id="topAdContainer" style="text-align: center; margin: 10px auto; max-width: 1200px;"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 AppNova</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="ابحث عن تطبيق...">
+                <button onclick="searchApps()">🔍</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 الرئيسية</a></li>
+                <li><a href="apps.html">📱 التطبيقات</a></li>
+                <li id="uploadNav"><a href="upload.html">⬆️ رفع تطبيق</a></li>
+                <li id="loginNav"><a href="login.html">🔐 تسجيل الدخول</a></li>
+                <li id="adminNav" style="display:none;"><a href="admin.html">👑 الإدارة</a></li>
+                <li id="moderatorNav" style="display:none;"><a href="admin.html">🛡️ الإشراف</a></li>
+                <li id="userInfo" style="display:none;"></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <aside class="ad-sidebar ad-left">
+            <div id="leftAdContainer" class="ad-container"></div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="hero">
+                <h1>مرحباً بك في AppNova - أكبر متجر تطبيقات عربية مجاني</h1>
+                <p>منصة عربية احترافية لرفع ومشاركة وتحميل تطبيقات الموبيل المجانية</p>
+            </div>
+            
+            <div class="apps-section">
+                <h2>🕐 أحدث التطبيقات</h2>
+                <div class="apps-grid" id="latestApps"></div>
+            </div>
+            
+            <div class="apps-section">
+                <h2>📥 الأكثر تحميلاً</h2>
+                <div class="apps-grid" id="mostDownloadedApps"></div>
+            </div>
+            
+            <div class="apps-section">
+                <h2>⭐ أعلى تقييم</h2>
+                <div class="apps-grid" id="topRatedApps"></div>
+            </div>
+            
+            <!-- قسم النصوص لتحسين SEO -->
+            <div style="background: #f8fafc; border-radius: 20px; padding: 30px; margin-top: 30px;">
+                <h2 style="color: #2d3748; margin-bottom: 20px;">📱 تحميل تطبيقات مجانية - AppNova</h2>
+                <p style="line-height: 1.8; color: #4a5568;">
+                    AppNova هو أكبر متجر عربي لتحميل التطبيقات المجانية. نوفر لك آلاف التطبيقات والألعاب في مختلف المجالات:
+                    <strong>تطبيقات التواصل الاجتماعي</strong>، <strong>ألعاب الأندرويد</strong>، <strong>تطبيقات تعليمية</strong>، 
+                    <strong>برامج الإنتاجية</strong>، <strong>تطبيقات الترفيه</strong>. جميع التطبيقات متاحة للتحميل المباشر والمجاني.
+                    انضم إلى مجتمع AppNova واستمتع بتجربة فريدة في عالم التطبيقات العربية.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+                    <span style="background: #e2e8f0; padding: 5px 12px; border-radius: 20px;">📱 تحميل تطبيقات</span>
+                    <span style="background: #e2e8f0; padding: 5px 12px; border-radius: 20px;">🎮 تحميل العاب</span>
+                    <span style="background: #e2e8f0; padding: 5px 12px; border-radius: 20px;">📚 تطبيقات تعليمية</span>
+                    <span style="background: #e2e8f0; padding: 5px 12px; border-radius: 20px;">💬 تطبيقات تواصل</span>
+                    <span style="background: #e2e8f0; padding: 5px 12px; border-radius: 20px;">💼 برامج إنتاجية</span>
+                    <span style="background: #e2e8f0; padding: 5px 12px; border-radius: 20px;">🎬 تطبيقات ترفيه</span>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ad-sidebar ad-right">
+            <div id="rightAdContainer" class="ad-container"></div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AppNova</h3>
+                <p>أكبر منصة عربية لتطبيقات الموبيل المجانية</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="index.html">🏠 الرئيسية</a></li>
+                    <li><a href="apps.html">📱 جميع التطبيقات</a></li>
+                    <li><a href="upload.html">⬆️ رفع تطبيق</a></li>
+                    <li><a href="privacy.html">🔒 سياسة الخصوصية</a></li>
+                    <li><a href="about.html">👥 من نحن</a></li>
+                    <li><a href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>📧 النشرة البريدية</h3>
+                <div class="newsletter">
+                    <input type="email" id="newsletterEmail" placeholder="بريدك الإلكتروني">
+                    <button onclick="subscribeNewsletter()">اشتراك</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2025 AppNova - أكبر متجر عربي لتحميل التطبيقات المجانية. جميع الحقوق محفوظة</div>
+    </footer>
+
+    <div id="bottomAdContainer" style="text-align: center; margin: 10px auto; max-width: 1200px;"></div>
+    <div id="adModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdModal()">&times;</span>
+            <div id="modalAdContent"></div>
+            <button onclick="closeAdModal()" class="submit-btn">إغلاق</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <script src="home.js"></script>
+    <script>
+        function searchApps() {
+            let term = document.getElementById('searchInput')?.value.toLowerCase().trim();
+            if(term) window.location.href = `apps.html?search=${encodeURIComponent(term)}`;
+        }
+    </script>
+</body>
+</html>
